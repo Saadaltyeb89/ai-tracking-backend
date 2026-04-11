@@ -1,12 +1,12 @@
 from sqlmodel import create_engine, SQLModel, Session
 from app.core.config import settings
 
-# تصحيح رابط قاعدة البيانات ليتوافق مع SQLAlchemy 2.0 والمحرك المتوفر
+# تصحيح رابط قاعدة البيانات ليتوافق مع SQLAlchemy 2.0 والمحرك المتوفر (Psycopg 3)
 database_url = settings.DATABASE_URL
 if database_url.startswith("postgres://"):
-    database_url = database_url.replace("postgres://", "postgresql+psycopg2://", 1)
+    database_url = database_url.replace("postgres://", "postgresql+psycopg://", 1)
 elif database_url.startswith("postgresql://"):
-    database_url = database_url.replace("postgresql://", "postgresql+psycopg2://", 1)
+    database_url = database_url.replace("postgresql://", "postgresql+psycopg://", 1)
 
 engine = create_engine(
     database_url, 

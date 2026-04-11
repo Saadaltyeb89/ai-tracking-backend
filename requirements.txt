@@ -4,7 +4,7 @@ pydantic==2.6.3
 pydantic-settings==2.2.1
 sqlalchemy==2.0.28
 sqlmodel==0.0.16
-psycopg2==2.9.9
+psycopg[binary] # Psycopg 3 (Modern)
 python-jose[cryptography]==3.3.0
 passlib[bcrypt]==1.7.4
 python-multipart==0.0.9
