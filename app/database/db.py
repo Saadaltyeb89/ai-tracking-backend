@@ -1,10 +1,15 @@
 from sqlmodel import create_engine, SQLModel, Session
 from app.core.config import settings
 
+# تصحيح رابط قاعدة البيانات ليتوافق مع SQLAlchemy 2.0
+database_url = settings.DATABASE_URL
+if database_url.startswith("postgres://"):
+    database_url = database_url.replace("postgres://", "postgresql://", 1)
+
 engine = create_engine(
-    settings.DATABASE_URL, 
-    echo=True, # سيقوم بطباعة أوامر الـ SQL في الـ Terminal (للمساعدة في التطوير)
-    connect_args={"check_same_thread": False} if "sqlite" in settings.DATABASE_URL else {}
+    database_url, 
+    echo=True, 
+    connect_args={"check_same_thread": False} if "sqlite" in database_url else {}
 )
 
 def create_db_and_tables():
