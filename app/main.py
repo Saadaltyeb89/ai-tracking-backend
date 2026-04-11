@@ -21,7 +21,15 @@ app.add_middleware(
 # 2. إنشاء الجداول عند البداية
 @app.on_event("startup")
 def on_startup():
-    create_db_and_tables()
+    try:
+        print("🚀 Starting database initialization...")
+        create_db_and_tables()
+        print("✅ Database initialized successfully!")
+    except Exception as e:
+        print("❌ FATAL: Database initialization failed!")
+        import traceback
+        traceback.print_exc()
+        # لا نغلق التطبيق هنا لنسمح للـ Logs بالظهور بوضوح
 
 # 3. ربط المسارات (Routes)
 app.include_router(auth.router, prefix=settings.API_V1_STR)
