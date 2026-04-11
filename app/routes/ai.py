@@ -6,6 +6,8 @@ from app.routes.tasks import get_current_user
 from app.services.ai_service import ai_service
 from pydantic import BaseModel
 
+router = APIRouter(prefix="/ai", tags=["AI Suggestions"])
+
 class ChatRequest(BaseModel):
     message: str
 
