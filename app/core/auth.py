@@ -12,10 +12,11 @@ def verify_google_token(token: str) -> dict:
     """
     try:
         # التحقق من الرمز باستخدام مكتبة جوجل الرسمية
+        client_id = settings.GOOGLE_CLIENT_ID or "119425300853-ipk2tusggfmug6qluhcqooe6opqc5hgi.apps.googleusercontent.com"
         idinfo = id_token.verify_oauth2_token(
             token, 
             requests.Request(), 
-            settings.GOOGLE_CLIENT_ID
+            client_id
         )
 
         # التأكد من أن الرمز صادر من جهة موثوقة (جوجل)
